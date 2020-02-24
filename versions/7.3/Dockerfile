@@ -15,9 +15,9 @@ RUN . /etc/os-release && \
         echo '' >> /etc/apt/sources.list; \
         apt-get update -y | true; \
         apt-install -y --force-yes deb-multimedia-keyring; \
-        apt-get update -y; \
     fi; \
     \
+    apt-get update -y && \
     apt-install -y ffmpeg && \
     \
     ls -lah /usr/bin/ff* && \
