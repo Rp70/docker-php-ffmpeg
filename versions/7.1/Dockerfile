@@ -20,8 +20,8 @@ RUN . /etc/os-release && \
     \
     apt-install -y ffmpeg && \
     \
-    ffmpeg -version && \
-    ffprobe -version
+    ls -lah /usr/bin/ff* && \
+    ffmpeg -version
 
 
 #ENTRYPOINT ["/entrypoint.sh"]
