@@ -5,4 +5,4 @@ All PRs and feedback are welcome!
 
 # Helpful Links
 * [PHP-FPM 5.3, 5.4, 5.5, 5.6, 7.0, 7.1, 7.2, 7.3, 7.4 Docker image](https://github.com/Rp70/docker-php)
-* [PHP-FFMpeg](https://github.com/PHP-FFMpeg/PHP-FFMpeg)
+* [PHP-FFMpeg](https://github.com/PHP-FFMpeg/PHP-FFMpeg): An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
