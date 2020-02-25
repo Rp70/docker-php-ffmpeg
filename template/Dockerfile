@@ -31,12 +31,13 @@ RUN set -ex && \
         exit 1; \
     fi; \
     \
-    tar xvf ffmpeg-release-amd64-static.tar.xz && \
-    mv ffmpeg-release-amd64-static/ffmpeg /usr/bin/ && \
+    mkdir /tmp/ffmpeg && \
+    tar -C /tmp/ffmpeg --strip-components=1 -xvf ffmpeg-release-amd64-static.tar.xz && \
+    mv ffmpeg/ffmpeg /usr/bin/ && \
     chmod +x /usr/bin/ffmpeg && \
-    mv ffmpeg-release-amd64-static/ffprobe /usr/bin/ && \
+    mv ffmpeg/ffprobe /usr/bin/ && \
     chmod +x /usr/bin/ffprobe && \
-    mv ffmpeg-release-amd64-static /usr/local/ffmpeg && \
+    mv ffmpeg /usr/local/ffmpeg && \
     \
     ls -lah /usr/bin/ff* && \
     ffmpeg -version && \

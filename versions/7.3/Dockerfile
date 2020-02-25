@@ -5,7 +5,8 @@ LABEL GitHub="https://github.com/Rp70/docker-php-ffmpeg"
 
 #COPY files/ /
 
-RUN . /etc/os-release && \
+RUN set -ex && \
+    . /etc/os-release && \
     # Reference: "How to Install FFmpeg on Debian 8 or Debian 9" at https://www.vultr.com/docs/how-to-install-ffmpeg-on-debian-8-or-9
     # If OS is Debian 8 (Jessie), update sources.list
     # if [ "$ID" = 'debian' -a "$VERSION_ID" = '8' ]; then \
@@ -30,12 +31,13 @@ RUN . /etc/os-release && \
         exit 1; \
     fi; \
     \
-    tar xvf ffmpeg-release-amd64-static.tar.xz && \
-    mv ffmpeg-release-amd64-static/ffmpeg /usr/bin/ && \
+    mkdir /tmp/ffmpeg && \
+    tar -C /tmp/ffmpeg --strip-components=1 -xvf ffmpeg-release-amd64-static.tar.xz && \
+    mv ffmpeg/ffmpeg /usr/bin/ && \
     chmod +x /usr/bin/ffmpeg && \
-    mv ffmpeg-release-amd64-static/ffprobe /usr/bin/ && \
+    mv ffmpeg/ffprobe /usr/bin/ && \
     chmod +x /usr/bin/ffprobe && \
-    mv ffmpeg-release-amd64-static /usr/local/ffmpeg && \
+    mv ffmpeg /usr/local/ffmpeg && \
     \
     ls -lah /usr/bin/ff* && \
     ffmpeg -version && \
