@@ -11,11 +11,14 @@ if [ ${#buildVersions[@]} -gt 0 ]; then
     done
 fi
 
-#echo ${!versions[@]};exit;
-
+TMPBUILD=tmp/build
+tag=`date +%F`
+rm -rdf $TMPBUILD
+mkdir -p $TMPBUILD
 for version in "${!versions[@]}"; do
-    tag=`date +%F`
-    #time docker pull php:$version-fpm
-    time docker build --pull --tag phpfpm-ffmpeg-$version:$tag versions/$version | tee tmp/build-$version.log
+    PHPVersion="$version"
+    cp -rav versions/$version/* $TMPBUILD/
+    sed -i -e "1s|.*|FROM phpfpm-$PHPVersion|" $TMPBUILD/Dockerfile
+    time docker build --tag phpfpm-ffmpeg-$version:$tag $TMPBUILD | tee tmp/build-$version.log
     time docker tag phpfpm-ffmpeg-$version:$tag phpfpm-ffmpeg-$version:latest
 done
